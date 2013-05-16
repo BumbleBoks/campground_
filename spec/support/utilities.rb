@@ -39,6 +39,12 @@ def log_in(user)
   # session[:user_id] = user.id
 end
 
+# set inaccessible attributes for testing
+def set_inaccessible_attribute(name, value)
+  params = ActionController::Parameters.new(name: value)
+  params
+end
+
 # clears all tables besides the ones that are seeded
 def clear_all_databases
   excluded_tables = ["schema_migrations", "common_states", "common_activities"]

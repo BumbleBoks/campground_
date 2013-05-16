@@ -286,7 +286,7 @@ describe "UserPages" do
             click_button "Save password"
           end
           
-          it { should have_content("Password doesn\'t match confirmation") };
+          it { should have_content("Password confirmation doesn\'t match Password") };
           it { should have_content("Password can\'t be blank") };
           it { should have_content("Password is too short (minimum is 6 characters)") };
           it { should have_content("Password is invalid") };

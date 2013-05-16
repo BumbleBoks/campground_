@@ -1,0 +1,10 @@
+<% unless trail.nil? %>
+<h4>Updates for <%= trail.name %></h4>
+	<% if trail.updates.any? %>
+		<%= render_update_partial(trail.updates, false) %>
+	<% else %>
+		<span class="update_content">
+			No updates found
+		</span>
+	<% end %>
+<% end %>

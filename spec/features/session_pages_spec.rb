@@ -1,10 +1,11 @@
 require 'spec_helper'
 
-describe "SessionPages" do
+describe "SessionPages", type: :feature do
+  after(:all) { clear_all_databases } 
   
   subject { page }
   
-  describe "log in" do
+  describe "log in", type: :feature do
     
     before { visit login_path }
     
@@ -43,7 +44,9 @@ describe "SessionPages" do
     
     describe "with correct information" do
       let (:user) { FactoryGirl.create(:user) }
-      before { log_in user }   
+      before do
+        log_in user 
+      end 
       
       it { should have_page_title("Campground - #{user.name}'s Campsite") }
       it { should have_link('Log out', href: logout_path) }

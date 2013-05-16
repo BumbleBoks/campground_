@@ -114,12 +114,11 @@ describe "Trail pages" do
           click_button submit
         end
 
-        it { should have_page_title('Campground - Edit Trail') }
-        it { should have_selector('h2', text: 'Editing Another new trail') }
-        it { should have_field_with_name_and_value("Name", "Another new trail") }
-        it { should have_select('common_trail_state_id', selected: "New York") }
-        it { should have_checked_field("Hiking") }
-        it { should have_checked_field("Cycling") }
+        it { should have_page_title('Campground - Another new trail') }
+        it { should have_selector('h2', text: 'Another new trail') }
+        it { should have_content("New York") }
+        it { should have_content("Hiking") }
+        it { should have_content("Cycling") }
 
       end
     end # admin   

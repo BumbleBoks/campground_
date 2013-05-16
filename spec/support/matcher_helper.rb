@@ -2,8 +2,7 @@ RSpec::Matchers.define :have_page_title do |title|
   match do |page|
     html_element_raw = page.html.match(/<title>(.*)<\/title>/).to_s  
     html_element_without_title = html_element_raw.gsub(/<(\/)*(title)>/, '')
-    html_text = html_element_without_title.gsub(/(&#x27;)/, "'")
-    # print html_text
+    html_text = html_element_without_title.gsub(/(&#39;)/, "'")
     html_text.should eq(title) 
   end
 end

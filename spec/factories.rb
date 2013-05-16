@@ -42,15 +42,6 @@ FactoryGirl.define do
     author
     trail
   end
-
-  factory :log, class: Corner::Log do
-    title "Title"
-    content "Lorem ipsum"
-    user
-  end
   
-  factory :tag, class: Site::Tag do
-    name { generate(:random_string) }
-  end
   
 end    

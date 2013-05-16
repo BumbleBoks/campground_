@@ -1,7 +1,7 @@
 require "spec_helper"
-include Common::TrailsHelper
+#include Common::TrailsHelper
 
-describe "StaticPagesHelper" do
+describe Common::TrailsHelper do
   before do
     @state_activities = state_activity()
   end

@@ -33,7 +33,7 @@ describe "Request pages" do
         end
 
         it { should have_selector('h2', text: "Resetting Password") }
-        it { should have_content("Password doesn\'t match confirmation") }      
+        it { should have_content("Password is invalid") }      
         it { should have_content("Password is too short (minimum is 6 characters)") }      
         it { should have_content("Password confirmation can\'t be blank") }      
       end

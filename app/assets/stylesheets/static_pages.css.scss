@@ -1,0 +1,32 @@
+// Place all the styles related to the StaticPages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "body_styling";
+
+/* mixins */
+@mixin trail_buttons_styling {
+	@include body_button_styling(lighten(seagreen, 20%), oldlace);
+}
+
+#trail_selection_message {
+	text-align: center;
+	color: red;
+	font-style: italic;
+}
+
+#trail_id {
+	margin-left: 50px;
+}
+
+#get_updates_button {
+	@include trail_buttons_styling;
+}
+
+#add_trail_button {
+	@include trail_buttons_styling;
+}
+
+#show_trail_button {
+	@include trail_buttons_styling;
+}

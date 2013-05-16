@@ -30,7 +30,6 @@ describe User do
   it { should respond_to(:admin) }
   it { should respond_to(:authenticate) }
   it { should respond_to(:updates) }
-  it { should respond_to(:logs) }
   it { should respond_to(:favorite_activities) }
   it { should respond_to(:activities) }
   it { should respond_to(:favorite_trails) }
@@ -50,21 +49,25 @@ describe User do
   describe "admin attribute" do
     it "should be inaccessible" do
       expect do
-        User.new(admin: true)
-      end.to raise_error(ActiveModel::MassAssignmentSecurity::Error)      
+        User.new(set_inaccessible_attribute(:admin, true))
+      end.to raise_error(ActiveModel::ForbiddenAttributesError)      
     end
   end
   
   it { should be_invalid_with_attribute_value(:login_id, ' ') }
   it { should be_invalid_with_attribute_value(:name, ' ') }
   it { should be_invalid_with_attribute_value(:email, ' ') }
-  it { should be_invalid_with_attribute_value(:password_confirmation, nil) }
   it { should be_invalid_with_attribute_value(:login_id, 'w'*51) }
   it { should be_invalid_with_attribute_value(:name, 'z'*51) }
   
   describe "without password" do
-    before { @user.password = @user.password_confirmation = ' ' }
-    it { should_not be_valid }
+    before { @user.password = @user.password_confirmation = nil }
+    its(:password) { should_not be_nil }    
+  end
+
+  describe "without password confirmation" do
+    before { @user.password_confirmation = nil }
+    its(:password_confirmation) { should_not be_nil }    
   end
   
   describe "with duplicate login" do
@@ -210,30 +213,14 @@ describe User do
       FactoryGirl.create(:update, content: "Lorem ipsum", author: @user, trail: trail) 
     end
     it "should destroy update associations for the user" do
-      updates = @user.updates.dup
+      update_ids = @user.updates.map { |update| update.id }
       @user.destroy
-      updates.should_not be_empty
-      updates.each do |update|
-        Community::Update.find_by_id(update.id).should be_nil
+      update_ids.each do |id|
+        Community::Update.find_by(id: id).should be_nil
       end
     end
   end
 
-  describe "log associations" do
-    before do
-      @user.save
-      FactoryGirl.create(:log, user: @user) 
-    end
-    it "should destroy log associations for the user" do
-      logs = @user.logs.dup
-      @user.destroy
-      logs.should_not be_empty
-      logs.each do |log|
-        Corner::Log.find_by_id(log.id).should be_nil
-      end
-    end
-  end
-  
   describe "favorite activity associations" do
     let(:activity) { FactoryGirl.create(:activity) }
     before do
@@ -241,11 +228,10 @@ describe User do
       @user.favorite_activities.create!(activity_id: activity.id)
     end
     it "should destroy favorite activity associations for the user" do
-      favorite_activities = @user.favorite_activities.dup
+      activity_ids = @user.favorite_activities.map { |favs| favs.id }
       @user.destroy
-      favorite_activities.should_not be_empty
-      favorite_activities.each do |favorite_activity|
-        Corner::FavoriteActivity.find_by_id(favorite_activity.id).should be_nil
+      activity_ids.each do |id|
+        Corner::FavoriteActivity.find_by(id: id).should be_nil
       end
     end    
   end
@@ -257,11 +243,10 @@ describe User do
       @user.favorite_trails.create!(trail_id: trail.id)
     end
     it "should destroy favorite trails associations for the user" do
-      favorite_trails = @user.favorite_trails.dup
+      trail_ids = @user.favorite_trails.map { |favs| favs.id }
       @user.destroy
-      favorite_trails.should_not be_empty
-      favorite_trails.each do |favorite_trail|
-        Corner::FavoriteTrail.find_by_id(favorite_trail.id).should be_nil
+      trail_ids.each do |id|
+        Corner::FavoriteTrail.find_by(id: id).should be_nil
       end
     end
     

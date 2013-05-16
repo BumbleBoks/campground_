@@ -62,11 +62,10 @@ describe Common::Trail do
     before { @trail.activity_associations.build(activity_id: activity.id) }
     
     it "should destroy activity_associations for the trail" do
-      activity_associations = @trail.activity_associations.dup
+      association_ids = @trail.activity_associations.map { |assoc| assoc.id }
       @trail.destroy
-      activity_associations.should_not be_empty
-      activity_associations.each do |association|
-        Common::ActivityAssociation.find_by_id(association.id).should be_nil
+      association_ids.each do |id|
+        Common::ActivityAssociation.find_by(id: id).should be_nil
       end
     end
   end
@@ -79,11 +78,10 @@ describe Common::Trail do
     end 
     
     it "should destroy update associations for the trail" do
-      updates = @trail.updates.dup
+      update_ids = @trail.updates.map { |update| update.id }
       @trail.destroy
-      updates.should_not be_empty
-      updates.each do |update|
-        Community::Update.find_by_id(update.id).should be_nil
+      update_ids.each do |id|
+        Community::Update.find_by(id: id).should be_nil
       end
     end
   end
@@ -96,11 +94,10 @@ describe Common::Trail do
     end 
     
     it "should destroy favorite trails associations for the trail" do
-      favorite_trails = @trail.favorite_trails.dup
+      favorite_ids = @trail.favorite_trails.map { |favs| favs.id }
       @trail.destroy
-      favorite_trails.should_not be_empty
-      favorite_trails.each do |favorite_trail|
-        Corner::FavoriteTrail.find_by_id(favorite_trail.id).should be_nil
+      favorite_ids.each do |id|
+        Corner::FavoriteTrail.find_by(id: id).should be_nil
       end
     end
   end

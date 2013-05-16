@@ -52,11 +52,10 @@ describe Common::Activity do
     end
     
     it "should destroy activity_associations for the activity" do
-      activity_associations = @activity.activity_associations.dup
+      association_ids = @activity.activity_associations.map { |assoc| assoc.id }
       @activity.destroy
-      activity_associations.should_not be_empty
-      activity_associations.each do |activity_association|
-        Common::ActivityAssociation.find_by_id(activity_association.id).should be_nil
+      association_ids.each do |id|
+        Common::ActivityAssociation.find_by(id: id).should be_nil
       end
     end
   end
@@ -70,11 +69,10 @@ describe Common::Activity do
     end
     
     it "should destroy favorite_activities for the activity" do
-      favorite_activities = @activity.favorite_activities.dup
+      favorite_ids = @activity.favorite_activities.map { |favs| favs.id}
       @activity.destroy
-      favorite_activities.should_not be_empty
-      favorite_activities.each do |favorite_activity|
-        Corner::FavoriteActivity.find_by_id(favorite_activity.id).should be_nil
+      favorite_ids.each do |id|
+        Corner::FavoriteActivity.find_by(id: id).should be_nil
       end
     end
     

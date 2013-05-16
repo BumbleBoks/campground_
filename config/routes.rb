@@ -1,7 +1,40 @@
 Campground::Application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
+  get 'invite_user', to: 'users#invite_user', as: 'invite_user'
+  resources :users
+  
+  resources :sessions, only: :create
+  
+  root 'static_pages#home'
+  get '/about' => 'static_pages#about'
+  get '/contact' => 'static_pages#contact'
+  
+  get 'login', to: 'sessions#new', as: 'login'
+  delete 'logout', to: 'sessions#destroy', as: 'logout'
+  
+  namespace :common do
+    resources :trails
+  end
+  
+  namespace :community do
+    resources :updates, only: [:create]
+  end
 
+  get 'favorites/show', to: 'corner/favorites#show', as: 'favorites/show'
+  get 'favorites/new', to: 'corner/favorites#new', as: 'favorites/new'
+  namespace :corner do
+    resources :favorites, only: [:create] 
+    post 'favorites/add_trail'
+    post 'favorites/remove_trail'    
+  end
+  
+  get "site/user_requests/:token", to: 'site/user_requests#edit_request', as: "/edit_site_user_request/"
+  post "site/user_requests/:token", to: 'site/user_requests#process_request'
+  namespace :site do
+    resources :user_requests, only: [:create]
+  end  
+  
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 

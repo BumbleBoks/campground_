@@ -1,0 +1,22 @@
+<% provide(:title, "Campground - #{current_user.name}'s Favorites") %>
+<h2>My Favorites</h2>
+
+<div id = "other_links_button">
+	<%= link_to "Change favorites", favorites_new_path %>
+</div>	
+
+<div id="favorite_activities">
+	<h4>Activities</h4>
+	<%= output_with_commas(current_user.activities, :name) %>
+</div>
+
+<div id="favorite_trails">
+	<h4>Trails</h4>
+	<ul>
+	<% current_user.trails.each do |trail| %>
+		<li>
+			<%= link_to "#{trail.name}, #{trail.state.name}", common_trail_path(trail) %>
+		</li>
+	<% end %>
+	</ul>	
+</div>	
