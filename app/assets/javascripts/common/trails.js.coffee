@@ -1,25 +1,25 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
-$(document).on "page:change", ->
-  set_trail_html = (trails) ->
-    activity = $('#activity_id :selected').text()
-    state = $('#state_id :selected').text()
-    if activity == 'Select an activity' || state == 'Select a state'
-    else
-      options = $(trails).filter("optgroup[label='#{state},#{activity}']").html()
-    if options 
-      $('#trail_id').html(options)
-      $('#trail_id').show()
-      $('#get_updates_button').show()
-      $('#add_trail_button').show()	
-      $('#trail_selection_message').hide()
-    else
-      $('#trail_id').hide()
-      $('#get_updates_button').hide()
-      $('#add_trail_button').hide()	
-      $('#trail_selection_message').show()	
-	
+set_trail_html = (trails) ->
+  activity = $('#activity_id :selected').text()
+  state = $('#state_id :selected').text()
+  if activity == 'Select an activity' || state == 'Select a state'
+  else
+    options = $(trails).filter("optgroup[label='#{state},#{activity}']").html()
+  if options 
+    $('#trail_id').html(options)
+    $('#trail_id').show()
+    $('#get_updates_button').show()
+    $('#add_trail_button').show()	
+    $('#trail_selection_message').hide()
+  else
+    $('#trail_id').hide()
+    $('#get_updates_button').hide()
+    $('#add_trail_button').hide()	
+    $('#trail_selection_message').show()	
+
+page_load = ->	
   trails = $('#trail_id').html()
   $('#trail_id').hide()
   $('#get_updates_button').hide()
@@ -41,3 +41,12 @@ $(document).on "page:change", ->
       type: 'GET'
       dataType: "script"
       data: trail_id: trail_id    
+
+
+$(document).ready ->
+  page_load()
+
+$(document).on "page:change", ->
+  page_load()
+
+
