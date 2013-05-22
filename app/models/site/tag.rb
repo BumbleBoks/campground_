@@ -1,4 +1,12 @@
 class Site::Tag < ActiveRecord::Base
+  
+  has_many :tag_associations, class_name: "Site::TagAssociation", foreign_key: "tag_id",
+      inverse_of: :tag, dependent: :destroy
+  has_many :taggables, through: :tag_associations
+  
+  has_many :tagged_logs, through: :tag_associations, source: :taggable,
+      source_type: "Corner::Log"
+  
   validates :name, presence: true,                
             format: { with: /\A[a-zA-Z]+\z/ },
             length: { maximum: 20 },

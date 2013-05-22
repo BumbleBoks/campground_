@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130522180032) do
+ActiveRecord::Schema.define(version: 20130522214734) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,6 +84,32 @@ ActiveRecord::Schema.define(version: 20130522180032) do
   add_index "corner_favorite_trails", ["trail_id"], name: "index_corner_favorite_trails_on_trail_id", using: :btree
   add_index "corner_favorite_trails", ["user_id", "trail_id"], name: "index_corner_favorite_trails_on_user_id_and_trail_id", unique: true, using: :btree
   add_index "corner_favorite_trails", ["user_id"], name: "index_corner_favorite_trails_on_user_id", using: :btree
+
+  create_table "corner_logs", force: true do |t|
+    t.integer  "user_id",                 null: false
+    t.string   "title",       limit: 100, null: false
+    t.text     "content",                 null: false
+    t.integer  "activity_id"
+    t.date     "log_date",                null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "corner_logs", ["log_date"], name: "index_corner_logs_on_log_date", using: :btree
+  add_index "corner_logs", ["user_id", "activity_id"], name: "index_corner_logs_on_user_id_and_activity_id", using: :btree
+  add_index "corner_logs", ["user_id"], name: "index_corner_logs_on_user_id", using: :btree
+
+  create_table "site_tag_associations", force: true do |t|
+    t.integer  "tag_id",        null: false
+    t.integer  "taggable_id",   null: false
+    t.string   "taggable_type", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "site_tag_associations", ["tag_id", "taggable_id", "taggable_type"], name: "by_tag_in_taggable_item", unique: true, using: :btree
+  add_index "site_tag_associations", ["tag_id"], name: "index_site_tag_associations_on_tag_id", using: :btree
+  add_index "site_tag_associations", ["taggable_id", "taggable_type"], name: "by_taggable_item", using: :btree
 
   create_table "site_tags", force: true do |t|
     t.string   "name",       null: false

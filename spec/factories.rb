@@ -43,5 +43,14 @@ FactoryGirl.define do
     trail
   end
   
+  factory :tag, class: Site::Tag do
+    name { generate(:random_string) }
+  end
+  
+  factory :log, class: Corner::Log do
+    title "Title"
+    content "Lorem ipsum"
+    user
+  end
   
 end    

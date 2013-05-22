@@ -30,6 +30,7 @@ describe User do
   it { should respond_to(:admin) }
   it { should respond_to(:authenticate) }
   it { should respond_to(:updates) }
+  it { should respond_to(:logs) }
   it { should respond_to(:favorite_activities) }
   it { should respond_to(:activities) }
   it { should respond_to(:favorite_trails) }
@@ -248,9 +249,21 @@ describe User do
       trail_ids.each do |id|
         Corner::FavoriteTrail.find_by(id: id).should be_nil
       end
-    end
-    
+    end    
   end
   
+  describe "log associations" do
+    before do
+      @user.save
+      FactoryGirl.create(:log, user: @user) 
+    end
+    it "should destroy log associations for the user" do
+      log_ids = @user.logs.map { |log| log.id }
+      @user.destroy
+      log_ids.each do |id|
+        Corner::Log.find_by(id: id).should be_nil
+      end
+    end
+  end
   
 end
