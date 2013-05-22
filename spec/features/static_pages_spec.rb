@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe "Static pages" do  
   let (:user) { FactoryGirl.create(:user) }
-  let (:state) { Common::State.find_by_name("Colorado") }
-  let (:activity) { Common::Activity.find_by_name("Cycling") }  
+  let (:state) { Common::State.find_by(name: "Colorado") }
+  let (:activity) { Common::Activity.find_by(name: "Cycling") }  
   
   subject { page }
     

@@ -192,7 +192,7 @@ describe User do
   
   describe "authentication" do
     before { @user.save }
-    let (:found_user) { User.find_by_login_id(@user.login_id) } 
+    let (:found_user) { User.find_by(login_id: @user.login_id) } 
 
     describe "with valid password" do
       it { should == found_user.authenticate(@user.password) }

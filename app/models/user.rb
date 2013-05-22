@@ -52,7 +52,7 @@ class User < ActiveRecord::Base
   
   # instance methods
   def set_favorite_attributes(new_attribute_ids, attributes, collection)    
-    user_attributes = new_attribute_ids.map { |id| collection.find_by_id(id) }    
+    user_attributes = new_attribute_ids.map { |id| collection.find_by(id: id) }    
     self.update_attribute(attributes, user_attributes)     
   end
   

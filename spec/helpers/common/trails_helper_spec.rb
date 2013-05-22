@@ -13,8 +13,8 @@ describe Common::TrailsHelper do
   
   # describe "all labels are generated" do
   #   before do
-  #     state = Common::State.find_by_name("Arizona")
-  #     activity = Common::Activity.find_by_name("Cycling")
+  #     state = Common::State.find_by(name: "Arizona")
+  #     activity = Common::Activity.find_by(name: "Cycling")
   #     @new_element = StateActivity.new(state, activity, []).category_label
   #   end
   # 

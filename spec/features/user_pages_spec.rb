@@ -160,7 +160,7 @@ describe "UserPages" do
       
       describe "and login to home page" do
         before { click_button submit }
-        let (:user) { User.find_by_login_id("examplefoo") }
+        let (:user) { User.find_by(login_id: "examplefoo") }
         
         it { should have_link("Log out", logout_path) }
         it { should have_link("Profile", user_path(user)) }
@@ -182,7 +182,7 @@ describe "UserPages" do
     
     describe "after logging in" do
       before do
-        user.favorite_activities.create(activity_id: Common::Activity.find_by_name("Cycling").id)
+        user.favorite_activities.create(activity_id: Common::Activity.find_by(name: "Cycling").id)
         update.save
         log_in user
         visit user_path(user)

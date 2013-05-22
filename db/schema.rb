@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130515234704) do
+ActiveRecord::Schema.define(version: 20130522180032) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,6 +84,14 @@ ActiveRecord::Schema.define(version: 20130515234704) do
   add_index "corner_favorite_trails", ["trail_id"], name: "index_corner_favorite_trails_on_trail_id", using: :btree
   add_index "corner_favorite_trails", ["user_id", "trail_id"], name: "index_corner_favorite_trails_on_user_id_and_trail_id", unique: true, using: :btree
   add_index "corner_favorite_trails", ["user_id"], name: "index_corner_favorite_trails_on_user_id", using: :btree
+
+  create_table "site_tags", force: true do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "site_tags", ["name"], name: "index_site_tags_on_name", unique: true, using: :btree
 
   create_table "site_user_requests", force: true do |t|
     t.string   "email",        null: false

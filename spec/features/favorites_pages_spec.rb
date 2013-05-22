@@ -46,7 +46,7 @@ describe "Favorites pages" do
     
     describe "when logged in" do
       before do
-        user.activities.push(Common::Activity.find_by_name:"Hiking")
+        user.activities.push(Common::Activity.find_by(name:"Hiking"))
         log_in user
         visit favorites_new_path
       end

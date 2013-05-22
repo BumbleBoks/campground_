@@ -63,7 +63,7 @@ describe "Trail pages" do
 
         describe "should create a new trail and show edit page" do
           before { click_button submit }
-          let(:trail) { Common::Trail.find_by_name("New Trail") }
+          let(:trail) { Common::Trail.find_by(name: "New Trail") }
 
           it { should have_page_title('Campground - Edit Trail') }
           it { should have_selector('h2', text: 'Editing New Trail') }
@@ -78,7 +78,7 @@ describe "Trail pages" do
   end #new trail page
   
   describe "edit an existing trail" do
-    let(:trail) { FactoryGirl.create(:trail, name: "Old Trail", state_id: Common::State.find_by_name("Oregon").id) }
+    let(:trail) { FactoryGirl.create(:trail, name: "Old Trail", state_id: Common::State.find_by(name: "Oregon").id) }
     let (:submit) { "Save changes" }
     
     describe "without logging in" do
@@ -126,12 +126,12 @@ describe "Trail pages" do
   
   describe "show a trail" do
     let(:trail) { FactoryGirl.create(:trail, name: "Old Trail", length: 8.0, description: "Short trail",
-      state_id: Common::State.find_by_name("Idaho").id) }
+      state_id: Common::State.find_by(name: "Idaho").id) }
     let (:submit) { "Add update" }
     
     before do
-      trail.activity_associations.create(activity_id: Common::Activity.find_by_name("Cross country skiing").id)
-      trail.activity_associations.create(activity_id: Common::Activity.find_by_name("Cycling").id)
+      trail.activity_associations.create(activity_id: Common::Activity.find_by(name: "Cross country skiing").id)
+      trail.activity_associations.create(activity_id: Common::Activity.find_by(name: "Cycling").id)
       visit common_trail_path(trail) 
     end
     
