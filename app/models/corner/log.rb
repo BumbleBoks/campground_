@@ -10,6 +10,7 @@ class Corner::Log < ActiveRecord::Base
             length: { maximum: 1000 }
   validates :log_date, presence: true
   
+  default_scope { order('log_date DESC') }
   before_validation :set_log_date
           
   protected        

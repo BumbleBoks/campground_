@@ -6,4 +6,5 @@ class ApplicationController < ActionController::Base
   
   include ApplicationHelper
   include SessionsHelper
+  include Corner::LogsHelper
 end

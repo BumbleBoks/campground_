@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
       log_in user
       redirect_to(root_path)
     else
+      flash.now[:error] = "Login ID/password combination not found."
       render 'new'
     end
   end

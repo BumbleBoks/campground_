@@ -1,5 +1,4 @@
 require "spec_helper"
-#include Common::TrailsHelper
 
 describe Common::TrailsHelper do
   before do

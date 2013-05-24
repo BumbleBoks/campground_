@@ -26,7 +26,12 @@ Campground::Application.routes.draw do
   namespace :corner do
     resources :favorites, only: [:create] 
     post 'favorites/add_trail'
-    post 'favorites/remove_trail'    
+    post 'favorites/remove_trail' 
+    
+    get "/logs/:year/:month/:day", to: 'logs#show', as: 'logs', constraints: {
+      year: /\d{4}/, month: /\d{1,2}/, day: /\d{1,2}/ 
+    }  
+    resources :logs, only: [:new, :create]       
   end
   
   get "site/user_requests/:token", to: 'site/user_requests#edit_request', as: "/edit_site_user_request/"

@@ -18,7 +18,7 @@ describe "SessionPages", type: :feature do
     describe "with incorrect information" do
       before { click_button "Log in" }
       
-      # it { should have error message }
+      it { should have_content("Login ID/password combination not found") }
       it { should have_selector('h2', text: "Enter campground") }
     end
     
