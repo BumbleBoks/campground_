@@ -40,6 +40,7 @@
 				<%= hidden_field_tag "page", 1 %>
 				<%= f.submit "Save Profile" %>			
 			</div>
+											
 		<% end %>
 
 		<% if @page.to_i.eql?(2) %>
@@ -64,4 +65,10 @@
 		<% end %>
 	<% end -%>	
 </div>
+
+<div>
+	<%= link_to "Delete Account", user_path(@user), method: :delete, 
+		data: { confirm: 'Are you sure?' }, id: 'delete_user_button' %>			
+</div>
+
  

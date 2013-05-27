@@ -32,3 +32,16 @@ $photo_width: 150px;
 		top: 5px;		
 	}
 }
+
+#delete_user_button {
+	@include body_button_styling(rgb(240, 12, 39), oldlace);
+	padding: 10px;
+	position: relative;
+	top: 50px;
+	left: 150px;
+	a {
+		color:oldlace;
+		position: relative;
+		top: 5px;		
+	} 	
+}	
