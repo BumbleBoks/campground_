@@ -25,6 +25,10 @@ describe "User routes" do
     { get: "/invite_user" }.should route_to(controller: "users", action: "invite_user")
   end
 
+  it "route to delete user page" do
+    { delete: "/users/1"}.should route_to(controller: "users", action: "destroy", id: "1")
+  end
+  
   it "route named new users page" do
     { get: new_user_path }.should route_to(controller: "users", action: "new")
   end

@@ -227,6 +227,7 @@ describe "UserPages" do
       it { should have_page_title("Campground - Profile") }
       it { should have_selector('h2', text: "Changing Profile") }
       it { should have_link('Change favorites', favorites_new_path) }
+      it { should have_link('Delete Account')}
         
       describe "on submitting invalid values" do
         before do
@@ -318,6 +319,33 @@ describe "UserPages" do
       
       it { should have_page_title("Campground - #{user.name}'s Campsite") }
       it { should have_selector('h2', text: "My campsite") } 
+    end
+    
+  end
+  
+  describe "delete user" do
+    let (:user) { FactoryGirl.create(:user) }
+
+    before do
+      log_in user
+      visit edit_user_path(user)
+    end 
+    
+    it "should delete a user" do
+      expect { click_link('Delete Account') }.to change(User, :count).by(-1)
+    end
+    
+    describe "should take to home page without logging in" do
+      before do
+        @id = user.id
+        click_link('Delete Account') 
+      end 
+      
+      it { should have_page_title('Campground') }
+      it { should have_selector('h2', text: "Welcome to Campground") }
+      it "should not find the user" do
+        User.find_by(id: user.id).should be_nil
+      end
     end
     
   end

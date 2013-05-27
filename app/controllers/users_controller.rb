@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :guest_user, :only => [:new, :create, :invite_user]
-  before_action :authorize_user, :only => [:show, :edit, :update]
-  before_action :account_owner, :only => [:edit, :update]
+  before_action :authorize_user, :only => [:show, :edit, :update, :destroy]
+  before_action :account_owner, :only => [:edit, :update, :destroy]
   
   def show
     @user = User.find_by(id: params[:id])
@@ -41,6 +41,11 @@ class UsersController < ApplicationController
       @page = params[:page]
       render 'edit'
     end
+  end
+  
+  def destroy
+    @user.delete
+    redirect_to root_path
   end
 
   private
