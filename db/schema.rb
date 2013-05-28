@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130522214734) do
+ActiveRecord::Schema.define(version: 20130528191731) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,23 @@ ActiveRecord::Schema.define(version: 20130522214734) do
 
   add_index "common_trails", ["name"], name: "index_common_trails_on_name", using: :btree
   add_index "common_trails", ["state_id"], name: "index_common_trails_on_state_id", using: :btree
+
+  create_table "community_trades", force: true do |t|
+    t.integer  "trader_id",                              null: false
+    t.string   "trade_type",                             null: false
+    t.string   "gear",                                   null: false
+    t.text     "description",                            null: false
+    t.integer  "activity_id"
+    t.string   "trade_location",                         null: false
+    t.decimal  "min_price",      precision: 6, scale: 2
+    t.decimal  "max_price",      precision: 6, scale: 2
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "community_trades", ["gear"], name: "index_community_trades_on_gear", using: :btree
+  add_index "community_trades", ["min_price", "max_price"], name: "index_community_trades_on_min_price_and_max_price", using: :btree
+  add_index "community_trades", ["trade_type"], name: "index_community_trades_on_trade_type", using: :btree
 
   create_table "community_updates", force: true do |t|
     t.text     "content"

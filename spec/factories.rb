@@ -9,7 +9,7 @@ FactoryGirl.define do
     random_string    
   end
 
-  factory :user, aliases: [:author] do
+  factory :user, aliases: [:author, :trader] do
     sequence(:login_id) { |n| "foo#{n}" }    
     email { "#{login_id}@example.com" }
     name "The Foo"
@@ -53,4 +53,12 @@ FactoryGirl.define do
     user
   end
   
+  factory :trade, class: Community::Trade do
+    trade_type 'buy'
+    gear "Gear"
+    description "Lorem ipsum"
+    trade_location 'Some Location'
+    trader
+  end
+
 end    
