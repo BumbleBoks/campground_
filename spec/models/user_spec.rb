@@ -35,6 +35,7 @@ describe User do
   it { should respond_to(:activities) }
   it { should respond_to(:favorite_trails) }
   it { should respond_to(:trails) }
+  it { should respond_to(:trades) }
   
   it { should be_valid }
   it { should_not be_admin }
@@ -266,4 +267,18 @@ describe User do
     end
   end
   
+  describe "trade associations" do
+    before do
+      @user.save
+      FactoryGirl.create(:trade) 
+    end
+    it "should destroy trade associations for the user" do
+      trade_ids = @user.trades.map { |trade| trade.id }
+      @user.destroy
+      trade_ids.each do |id|
+        Community::Trade.find_by(id: id).should be_nil
+      end
+    end
+  end
+
 end

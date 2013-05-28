@@ -12,9 +12,12 @@ class User < ActiveRecord::Base
   has_many :updates, class_name: "Community::Update", 
            foreign_key: "author_id", dependent: :destroy
   
- has_many :logs, class_name: "Corner::Log", 
+  has_many :logs, class_name: "Corner::Log", 
           foreign_key: "user_id", dependent: :destroy  
   
+  has_many :trades, class_name: "Community::Trade", 
+          foreign_key: "trader_id", dependent: :destroy  
+
   VALID_LOGIN_REGEX = /\A[A-Za-z\d_]+\z/
   validates :login_id, presence: true,
             length: { minimum: 1, maximum: 50 },
