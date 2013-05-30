@@ -9,6 +9,7 @@ class CreateCommunityTrades < ActiveRecord::Migration
       t.string :trade_location, null: false
       t.decimal :min_price, precision: 6, scale: 2
       t.decimal :max_price, precision: 6, scale: 2
+      t.boolean :completed, default: false
       
       t.timestamps
     end
@@ -16,5 +17,6 @@ class CreateCommunityTrades < ActiveRecord::Migration
     add_index :community_trades, :trade_type
     add_index :community_trades, :gear
     add_index :community_trades, [:min_price, :max_price]
+    add_index :community_trades, :completed
   end
 end

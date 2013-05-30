@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe Community::Trade do
+  after(:all) { clear_all_databases } 
+  
   let (:user) { FactoryGirl.create(:user) }
   let (:activity) { FactoryGirl.create(:activity) }
   before { @trade = user.trades.build(gear: 'Headlamp', description: 'Brand new!', activity_id: activity.id,
@@ -17,6 +19,9 @@ describe Community::Trade do
   it { should respond_to(:min_price) }
   it { should respond_to(:max_price) }
   it { should respond_to(:trade_location) }
+  it { should respond_to(:completed) }
+  
+  it { should_not be_completed }
   
   it { should be_invalid_with_attribute_value(:trade_type, nil) }
   it { should be_invalid_with_attribute_value(:gear, nil) }
