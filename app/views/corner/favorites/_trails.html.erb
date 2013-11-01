@@ -6,7 +6,7 @@
 			<li>
 				<%= hidden_field_tag "user[trail_ids][]", trail.id -%>
 				<%= trail.name %>, <%= trail.state.name -%>
-				<%= link_to "delete", "#", class:"delete_favorite_trail" -%>
+				<%= link_to "delete", "#", id:"delete_favorite_trail", class: "delete_link" -%>
 			</li>
 		<% end %>
 	</ul>	

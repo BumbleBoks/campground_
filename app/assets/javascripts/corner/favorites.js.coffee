@@ -14,10 +14,10 @@ $(document).on "page:change", ->
       input_string = '<input id="user_trail_ids_" type="hidden" value="' + trail_id + 
         '" name="user[trail_ids][]">'
       trail_name = $('#trail_id :selected').text() + ', ' + $('#state_id :selected').text()
-      link_string = ' <a id="delete_favorite_trail" href="#">delete</a>'
+      link_string = ' <a id="delete_favorite_trail" class="delete_link" href="#">delete</a>'
       append_string = input_string + trail_name + link_string
       $("#favorite_trails ul").append("<li></li>")
       $("#favorite_trails li").last().append(append_string)
 
-  $('#favorite_trails ul').on 'click', $("a.delete_favorite_trail"), (event) ->
+  $('#favorite_trails ul').on 'click', $("a#delete_favorite_trail"), (event) ->
     $(event.target).closest('li').remove()

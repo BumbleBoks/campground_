@@ -4,7 +4,7 @@
 		<%= link_to "Favorites", favorites_show_path, class: "title_text" %>
 	<% end %>
 	<%= content_tag(:div, class: div_name ) do %>
-		<%= link_to "Diary", generate_log_path(Corner::Log.first), 
+		<%= link_to "Diary", generate_log_path_for_today, 
 			class: "title_text" %>
 	<% end %>
 </div>

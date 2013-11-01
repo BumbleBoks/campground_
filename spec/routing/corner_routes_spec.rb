@@ -58,6 +58,20 @@ describe "Corner pages routes" do
     { post: "/corner/logs" }.should route_to(controller: "corner/logs", action: "create")
   end
     
+  it "route to user logs edit page" do
+    { get: "/corner/logs/2013/1/3/edit" }.should route_to(controller: "corner/logs", action: "edit", 
+      year: "2013", month: "1", day: "3")
+  end
+    
+  it "route to user logs update page" do
+    { post: "/corner/logs/2013/3/4" }.should route_to(controller: "corner/logs", action: "update", 
+      year: "2013", month: "3", day: "4")
+  end
+    
+  it "route to user logs delete page" do
+    { delete: "/corner/logs/1"}.should route_to(controller: "corner/logs", action: "destroy", id: "1")
+  end
+    
   it "route named user logs show page" do
     { get: corner_logs_path(2013,1,2) }.should route_to(controller: "corner/logs", action: "show",
       year: "2013", month: "1", day:"2")
@@ -67,4 +81,8 @@ describe "Corner pages routes" do
     { get: new_corner_log_path }.should route_to(controller: "corner/logs", action: "new")
   end
 
+  it "route named user logs edit page" do
+    { get: edit_corner_log_path(2013,1,2) }.should route_to(controller: "corner/logs", action: "edit", 
+      year: "2013", month: "1", day:"2")
+  end
 end

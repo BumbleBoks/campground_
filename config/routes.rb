@@ -29,11 +29,27 @@ Campground::Application.routes.draw do
     post 'favorites/remove_trail' 
     
     get "/logs/:year/:month/:day", to: 'logs#show', as: 'logs', constraints: {
-      year: /\d{4}/, month: /\d{1,2}/, day: /\d{1,2}/ 
+      year: /\d{4}/, month: /\d{1,2}/, day: /\d{1,2}/       
     }  
-    resources :logs, only: [:new, :create]       
+    resources :logs, only: [:new, :create, :destroy]       
   end
   
+  # edit and update path for corner::logs
+  get "/corner/logs/:year/:month/:day/edit", to: 'corner/logs#edit', as: 'edit_corner_log', constraints: {
+    year: /\d{4}/, month: /\d{1,2}/, day: /\d{1,2}/       
+  }
+  post "/corner/logs/:year/:month/:day", to: 'corner/logs#update', constraints: {
+    year: /\d{4}/, month: /\d{1,2}/, day: /\d{1,2}/       
+  }
+
+  patch "/corner/logs/:year/:month/:day", to: 'corner/logs#update', constraints: {
+    year: /\d{4}/, month: /\d{1,2}/, day: /\d{1,2}/       
+  }
+  
+  put "/corner/logs/:year/:month/:day", to: 'corner/logs#update', constraints: {
+    year: /\d{4}/, month: /\d{1,2}/, day: /\d{1,2}/       
+  }
+
   get "site/user_requests/:token", to: 'site/user_requests#edit_request', as: "/edit_site_user_request/"
   post "site/user_requests/:token", to: 'site/user_requests#process_request'
   namespace :site do

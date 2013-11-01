@@ -1,12 +1,18 @@
-<p>
-	<em>
-	<%= log.log_date.to_formatted_s(:calendar_date) %>
-	</em>
-</p>
+<em>
+<%= @date.to_formatted_s(:calendar_date) %>
+</em>
+
+<%= link_to "Edit", edit_corner_log_path(@date.year, @date.month, @date.day), 
+	class: "edit_link" %>
+<%= link_to "Delete", corner_log_path(log), method: :delete, 
+ 	data: { confirm: 'Are you sure?' }, class: "delete_link" %>
 <p>
   <b><%= log.title %></b>
 </p>
 
 <p>
   <%= log.content %>
-</p>	
+</p>
+
+
+

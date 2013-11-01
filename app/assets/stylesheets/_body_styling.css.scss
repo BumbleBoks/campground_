@@ -25,3 +25,11 @@
 	background-color: $background_color;
 	color: $color;
 }
+
+@mixin edit_delete_link_styling($link_color) {
+	color: $link_color;
+	font-family: arial;
+	font-size: 14px;
+	font-weight: 500;
+	margin-left: 10px;
+}

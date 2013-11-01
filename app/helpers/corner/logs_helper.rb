@@ -16,4 +16,8 @@ module Corner::LogsHelper
     log_path
   end
   
+  def generate_log_path_for_today
+    log = Corner::Log.find_by(log_date: Time.zone.today)
+    generate_log_path(log)
+  end
 end

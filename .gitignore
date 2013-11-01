@@ -17,6 +17,7 @@ git_push_changes
 # Ignore all logfiles and tempfiles.
 /log/*.log
 logfile
+notes.txt
 /tmp
 
 # Ignore other files
