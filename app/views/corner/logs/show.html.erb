@@ -4,6 +4,7 @@
 <div id="corner_log_log_date" class="hidden"></div>
 <div id="date_picker"></div>
 
-<div id="selected_log">
-	<%= render 'log', { log: @log } unless @log.nil? %>
+<div id="selected_log">	
+	<%#= render 'log', { log: @log } unless @log.nil? %>
+	<%= render 'log', { log: @log } %>
 </div>

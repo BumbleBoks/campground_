@@ -177,7 +177,15 @@ footer {
 		.flash_success {
 			@include flash_message_styling(rgb(212, 235, 172), green);
 		}
-
+		
+		.edit_link {
+			@include edit_delete_link_styling(rgb(106, 238, 3));
+		}
+		
+		.delete_link {
+			@include edit_delete_link_styling(red);
+		}
+		
 		#home_trail_updates {
 			margin-top: 30px;
 		}
