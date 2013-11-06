@@ -42,14 +42,10 @@ Campground::Application.routes.draw do
   post "/corner/logs/:year/:month/:day", to: 'corner/logs#update', constraints: {
     year: /\d{4}/, month: /\d{1,2}/, day: /\d{1,2}/       
   }
-
   patch "/corner/logs/:year/:month/:day", to: 'corner/logs#update', constraints: {
     year: /\d{4}/, month: /\d{1,2}/, day: /\d{1,2}/       
   }
   
-  put "/corner/logs/:year/:month/:day", to: 'corner/logs#update', constraints: {
-    year: /\d{4}/, month: /\d{1,2}/, day: /\d{1,2}/       
-  }
 
   get "site/user_requests/:token", to: 'site/user_requests#edit_request', as: "/edit_site_user_request/"
   post "site/user_requests/:token", to: 'site/user_requests#process_request'

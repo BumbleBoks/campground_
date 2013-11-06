@@ -60,7 +60,7 @@ describe Corner::Log do
         taggable_type: "Corner::Log").should_not be_nil      
     end
     
-    it "should destroy tag association for the user" do
+    it "should destroy tag association for the log" do
       association_ids = @log.tag_associations.map { |assoc| assoc.id }
       @log.destroy
       association_ids.each do |id|

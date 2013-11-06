@@ -15,3 +15,4 @@
 //= require turbolinks
 //= require_tree .
 //= require ../../../lib/assets/javascripts/date_picker
+//= require ../../../lib/assets/javascripts/message_popup

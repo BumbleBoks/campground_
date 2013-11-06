@@ -101,7 +101,11 @@ describe "Log pages" do
     let (:submit) { "Save log" }
     
     before do
+      @tag1 = FactoryGirl.create(:tag)
+      @tag2 = FactoryGirl.create(:tag)
       @user_log = FactoryGirl.create(:log, user: user)
+      @user_log.tags.push(@tag1)
+      @user_log.tags.push(@tag2)
     end
     
     describe "without logging in" do
@@ -122,6 +126,8 @@ describe "Log pages" do
       it { should have_selector('h2', text: "Change Log") } 
       it { should have_content(@user_log.title) }
       it { should have_content(@user_log.content) }    
+      it { should have_content(@tag1.name) }    
+      it { should have_content(@tag2.name) }    
     
       describe "with empty form" do
         before do

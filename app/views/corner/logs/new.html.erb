@@ -4,7 +4,7 @@
 <div class='project_form'>
 	<%= form_for @log, url: { action: :create } do |f| -%>
 
-		<%= render 'fields', f: f %>	
+		<%= render 'fields', { f: f } %>	
 	  
 	<% end -%>
 	

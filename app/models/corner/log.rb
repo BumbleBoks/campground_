@@ -13,6 +13,17 @@ class Corner::Log < ActiveRecord::Base
   default_scope { order('log_date DESC') }
   before_validation :set_log_date
           
+  def update_tags(tag_names)
+    tags = []
+    tag_names.each do |tname| 
+      tag = Site::Tag.find_or_create_by(name: tname) 
+      if tag.valid? 
+        tags.push(tag)
+      end
+    end
+    self.update_attribute(:tags, tags)
+  end
+               
   protected        
   def set_log_date
     if log_date.nil?

@@ -4,6 +4,7 @@ class Corner::LogsController < ApplicationController
   
   def new
     @log = current_user.logs.build
+    @tag = @log.tags.build
   end
   
   def create    
@@ -17,15 +18,17 @@ class Corner::LogsController < ApplicationController
   end
     
   def edit
+    @tags = @log.tags.build
   end
   
   def update 
+    # debugger
     @log = current_user.logs.find_by(log_date: log_params[:log_date])
     if @log.nil?
       @log = current_user.logs.build(log_params)
     end
     
-    if @log.update(log_params)
+    if @log.update(log_params) && @log.update_tags(params[:corner_log][:tag_names])
         flash[:success] = "Log successfully changed"
         redirect_to generate_log_path(@log)
       else
@@ -37,6 +40,7 @@ class Corner::LogsController < ApplicationController
   def show
     if @log.nil?
       @log = current_user.logs.build(log_date: @date)
+      @tag = @log.tags.build
       render 'edit'
     end
   end
@@ -49,6 +53,7 @@ class Corner::LogsController < ApplicationController
       redirect_to(corner_logs_path(log_date.year, log_date.month, log_date.day))
     end
   end
+  
   
   private 
   

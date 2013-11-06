@@ -20,4 +20,9 @@ module Corner::LogsHelper
     log = Corner::Log.find_by(log_date: Time.zone.today)
     generate_log_path(log)
   end
+  
+  def generate_tags_string(log)
+    tag_array = log.tags.map { |tag| tag.name }
+    tag_array.join(", ").to_s
+  end
 end

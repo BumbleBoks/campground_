@@ -11,4 +11,5 @@
  *= require_self
  *= require_tree .
  *= require ../../../lib/assets/stylesheets/date_picker
+ *= require ../../../lib/assets/stylesheets/message_popup
  */

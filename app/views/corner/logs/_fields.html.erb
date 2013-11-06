@@ -2,21 +2,39 @@
 
 <div id="date_picker"></div>
 
-<div>
-	<%= f.label :log_date, "Date" %>
-	<%= f.text_field :log_date %>
-</div>	
+<table id="log_input">
+	<td>
+		<div>
+			<%= f.label :log_date, "Date" %>
+			<%= f.text_field :log_date %>
+		</div>	
 
-<div>
-	<%= f.label :title, "Title" %>
-	<%= f.text_field :title %>
-</div>	
+		<div>
+			<%= f.label :title, "Title" %>
+			<%= f.text_field :title %>
+		</div>	
 
-<div>
-	<%= f.label :content, "Content" %>
-	<%= f.text_area :content, rows: 10 %>
-</div>	
+		<div>
+			<%= f.label :content, "Content" %>
+			<%= f.text_area :content, rows: 10 %>
+		</div>	
 	
+	</td>
+	
+	<td>
+		<%= f.fields_for :tags do |tag_form| %>
+			<div>
+				<%= tag_form.label :name, "Tags" %>
+				<%= tag_form.text_field :name %>
+				<%= link_to "+", "#", id: "add_log_tag", class: "log_tag_button" %>
+			</div>
+			<div id="log_tags">
+				<%= render 'tags', log: f.object %>
+			</div>
+		<% end %>
+	</td>	
+</table>
+
 <div>
 	<%= f.submit "Save log" %>			
 </div>
