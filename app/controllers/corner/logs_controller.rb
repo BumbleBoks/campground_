@@ -9,7 +9,7 @@ class Corner::LogsController < ApplicationController
   
   def create    
     @log = current_user.logs.build(log_params)
-    if @log.save
+    if @log.save && @log.update_tags(params[:corner_log][:tag_names])
       flash[:success] = "Log successfully added"
       redirect_to generate_log_path(@log)
     else
