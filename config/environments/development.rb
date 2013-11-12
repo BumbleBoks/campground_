@@ -25,7 +25,7 @@ Campground::Application.configure do
     user_name: ENV['MAIL_USERNAME'],
     password: ENV['MAIL_PASSWORD']
   }
-  config.action_mailer.default_url_options = { host: "localhost:3000"}
+  config.action_mailer.default_url_options = { host: "localhost:8080"}
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -37,4 +37,7 @@ Campground::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+  # # config.assets.compile = false
+  # config.serve_static_assets = true
+  # # config.assets.prefix = "/dev-assets"
 end
