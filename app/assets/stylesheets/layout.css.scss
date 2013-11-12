@@ -36,7 +36,7 @@ $h_font_family: "Trebuchet MS", Helvetica, sans-serif;
 /* universal */
 
 body {
-	background: url('background.png') repeat fixed center center;
+	background: image-url('background.png') repeat fixed center center;
 	margin-left: 10px;
 }
 
@@ -194,7 +194,7 @@ footer {
 
 .title_board {
 	height: 100px;
-	background: url("board.png") no-repeat scroll top;
+	background: image-url("board.png") no-repeat scroll top;
 	margin: 50px 20px 50px 20px;
 	.title_text {
 		color: darkkhaki;
