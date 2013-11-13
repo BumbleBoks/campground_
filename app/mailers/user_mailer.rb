@@ -23,4 +23,13 @@ class UserMailer < ActionMailer::Base
     to_email = "#{@user.name} <#{@user.email}>"
     mail to: to_email, subject: subject
   end
+  
+  def add_trail_message(user, trail_info)
+    @user = user
+    @trail_info = trail_info
+    subject = "Add a new trail"
+    to_email = "#{@user.name} <#{@user.email}>"
+    bcc_email = ENV['MAIL_USERNAME']
+    mail to: to_email, bcc: bcc_email, subject: subject
+  end
 end

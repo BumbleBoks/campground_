@@ -4,7 +4,7 @@ describe UserMailer do
   after(:all) { clear_all_databases } 
 
   describe "invite email" do
-    let(:email) { "invite2example.com" }      
+    let(:email) { "invite@example.com" }      
     before do
       @request = Site::UserRequest.new
       @request.email = email
@@ -85,6 +85,37 @@ describe UserMailer do
       subject {@actual_email}
       its (:to) { should eq ([user.email]) }
       its (:subject) { should eq("Your Campground Account") }
+      its (:encoded) { should include(@html_email_message) }
+      its (:encoded) { should include(@text_email_message) }                          
+    end
+  end
+
+  describe "add a trail email" do
+    let(:user) { FactoryGirl.create(:user) }
+    
+    before do
+      @trail_info = "Beaten Path - 10 mile long."
+    end
+    
+    it "adds email to deliveries array" do
+      expect do
+        UserMailer.add_trail_message(user, @trail_info).deliver      
+      end.to change(ActionMailer::Base.deliveries, :count).by(1)      
+    end
+    
+    describe "shows correct addresses and subject" do
+      before do
+        @actual_email = UserMailer.add_trail_message(user, @trail_info).deliver       
+        @html_email_message = "<p>We received info on a missing trail from you<\/p>"
+        @text_email_message = "We received info on a missing trail from you"
+      end
+    
+      subject {@actual_email}
+      its (:to) { should eq ([user.email]) }
+      its (:bcc) { should eq ([ENV['MAIL_USERNAME']]) }
+      its (:subject) { should eq("Add a new trail") }
+      its (:encoded) { should include(user.name) }
+      its (:encoded) { should include(@trail_info) }
       its (:encoded) { should include(@html_email_message) }
       its (:encoded) { should include(@text_email_message) }                          
     end
