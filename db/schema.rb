@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130528191731) do
+ActiveRecord::Schema.define(version: 20131113164728) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,17 @@ ActiveRecord::Schema.define(version: 20130528191731) do
   add_index "common_activity_associations", ["activity_id", "trail_id"], name: "index_common_activity_associations_on_activity_id_and_trail_id", unique: true, using: :btree
   add_index "common_activity_associations", ["activity_id"], name: "index_common_activity_associations_on_activity_id", using: :btree
   add_index "common_activity_associations", ["trail_id"], name: "index_common_activity_associations_on_trail_id", using: :btree
+
+  create_table "common_missing_trails", force: true do |t|
+    t.string   "user_name",               null: false
+    t.string   "user_email",              null: false
+    t.string   "info",       limit: 1000, null: false
+    t.string   "updates",    limit: 5000
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "common_missing_trails", ["created_at"], name: "index_common_missing_trails_on_created_at", using: :btree
 
   create_table "common_states", force: true do |t|
     t.string   "name",       null: false

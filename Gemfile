@@ -45,10 +45,11 @@ gem 'unicorn', '~> 4.7.0'
 
 group :development, :test do
   # Use debugger
-  gem 'debugger', '~> 1.6.2', group: [:development, :test]
+  gem 'debugger', '~> 1.6.2'
   gem 'rspec-rails', "~> 2.14.0"
   gem 'rb-fsevent', "~> 0.9.3", require: false
   gem 'guard-rspec', "~> 4.0.4"
+  gem 'annotate', "~>2.5.0"
 end
 
 group :test do

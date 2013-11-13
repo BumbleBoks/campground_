@@ -94,18 +94,21 @@ describe UserMailer do
     let(:user) { FactoryGirl.create(:user) }
     
     before do
-      @trail_info = "Beaten Path - 10 mile long."
+      # log_in user
+      trail_info = "Beaten Path - 10 mile long."
+      @missing_trail = Common::MissingTrail.create(user_name: user.name, user_email: user.email, 
+        info: trail_info)
     end
     
     it "adds email to deliveries array" do
       expect do
-        UserMailer.add_trail_message(user, @trail_info).deliver      
+        UserMailer.add_trail_message(@missing_trail).deliver      
       end.to change(ActionMailer::Base.deliveries, :count).by(1)      
     end
     
     describe "shows correct addresses and subject" do
       before do
-        @actual_email = UserMailer.add_trail_message(user, @trail_info).deliver       
+        @actual_email = UserMailer.add_trail_message(@missing_trail).deliver       
         @html_email_message = "<p>We received info on a missing trail from you<\/p>"
         @text_email_message = "We received info on a missing trail from you"
       end
@@ -115,7 +118,7 @@ describe UserMailer do
       its (:bcc) { should eq ([ENV['MAIL_USERNAME']]) }
       its (:subject) { should eq("Add a new trail") }
       its (:encoded) { should include(user.name) }
-      its (:encoded) { should include(@trail_info) }
+      its (:encoded) { should include(@missing_trail.info) }
       its (:encoded) { should include(@html_email_message) }
       its (:encoded) { should include(@text_email_message) }                          
     end

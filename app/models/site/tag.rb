@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: site_tags
+#
+#  id         :integer          not null, primary key
+#  name       :string(255)      not null
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class Site::Tag < ActiveRecord::Base
   
   has_many :tag_associations, class_name: "Site::TagAssociation", foreign_key: "tag_id",

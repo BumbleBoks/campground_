@@ -3,11 +3,11 @@
 # Table name: community_updates
 #
 #  id         :integer          not null, primary key
-#  content    :text             not null
-#  author_id  :integer          not null
-#  trail_id   :integer          not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  content    :text
+#  author_id  :integer
+#  trail_id   :integer
+#  created_at :datetime
+#  updated_at :datetime
 #
 
 require 'spec_helper'

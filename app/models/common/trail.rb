@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: common_trails
+#
+#  id          :integer          not null, primary key
+#  name        :string(75)       not null
+#  length      :decimal(5, 2)
+#  description :text
+#  state_id    :integer          not null
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+
 class Common::Trail < ActiveRecord::Base
   
   belongs_to :state, class_name: "Common::State"

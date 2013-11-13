@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: community_updates
+#
+#  id         :integer          not null, primary key
+#  content    :text
+#  author_id  :integer
+#  trail_id   :integer
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class Community::Update < ActiveRecord::Base
   belongs_to :author, 
              class_name: "User"

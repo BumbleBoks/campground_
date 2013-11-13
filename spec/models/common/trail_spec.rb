@@ -6,9 +6,9 @@
 #  name        :string(75)       not null
 #  length      :decimal(5, 2)
 #  description :text
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  state_id    :integer
+#  state_id    :integer          not null
+#  created_at  :datetime
+#  updated_at  :datetime
 #
 
 require 'spec_helper'

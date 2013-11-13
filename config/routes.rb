@@ -15,6 +15,7 @@ Campground::Application.routes.draw do
   
   namespace :common do
     resources :trails
+    resources :missing_trails, except: [:new, :show]
   end
   
   namespace :community do

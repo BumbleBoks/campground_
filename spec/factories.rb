@@ -36,6 +36,12 @@ FactoryGirl.define do
     state
     # activities
   end
+
+  factory :missing_trail, class: Common::MissingTrail do
+    user_name "Foo"
+    user_email "foo@example.com"
+    sequence(:info) { |n| "Tested path- #{n}" }
+  end
   
   factory :update, class: Community::Update do
     content "Lorem ipsum"

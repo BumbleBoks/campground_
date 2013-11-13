@@ -8,8 +8,8 @@
 #  email           :string(255)      not null
 #  password_digest :string(255)      not null
 #  admin           :boolean          default(FALSE)
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  created_at      :datetime
+#  updated_at      :datetime
 #
 
 require "spec_helper"
@@ -68,7 +68,7 @@ describe User do
   end
 
   describe "without password confirmation" do
-    before { @user.password_confirmation = nil }
+    before { @user.password_confirmation = "" }
     its(:password_confirmation) { should_not be_nil }    
   end
   

@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: common_activities
+#
+#  id         :integer          not null, primary key
+#  name       :string(255)      not null
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class Common::Activity < ActiveRecord::Base
   
   has_many :activity_associations, class_name: "Common::ActivityAssociation", 

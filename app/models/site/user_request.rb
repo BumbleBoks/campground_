@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: site_user_requests
+#
+#  id           :integer          not null, primary key
+#  email        :string(255)      not null
+#  token        :string(255)      not null
+#  request_type :string(255)      not null
+#  created_at   :datetime
+#  updated_at   :datetime
+#
+
 class Site::UserRequest < ActiveRecord::Base  
   VALID_EMAIL_REGEX = /\A[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}\z/i
   validates :email,  presence: true,

@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: site_tag_associations
+#
+#  id            :integer          not null, primary key
+#  tag_id        :integer          not null
+#  taggable_id   :integer          not null
+#  taggable_type :string(255)      not null
+#  created_at    :datetime
+#  updated_at    :datetime
+#
+
 require 'spec_helper'
 
 describe Site::TagAssociation do
