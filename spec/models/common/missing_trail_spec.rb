@@ -29,4 +29,15 @@ describe Common::MissingTrail do
   it { should be_invalid_with_attribute_value(:user_email, '') }
   it { should be_invalid_with_attribute_value(:info, '') }
   
+  
+  describe "with a very long info" do
+    before { @missing_trail.info = 'm'*1001 }    
+    it { should_not be_valid }
+  end
+
+  describe "with a very long updates" do
+    before { @missing_trail.updates = 'm'*5001 }    
+    it { should_not be_valid }
+  end
+  
 end

@@ -46,11 +46,6 @@ describe "Common pages routes" do
       action: "edit", id: "1")
   end
 
-  it "route to show missing trail page" do
-    { get: "/common/missing_trails/1" }.should route_to(controller: "common/missing_trails", 
-      action: "show", id: "1")
-  end
-
   it "route to missing trails create page" do
     { post: "/common/missing_trails" }.should route_to(controller: "common/missing_trails", action: "create")
   end

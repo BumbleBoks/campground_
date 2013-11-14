@@ -41,4 +41,12 @@ module ApplicationHelper
     end
   end
   
+  def shorten_string(input_string)
+    if input_string.length < 40
+      input_string
+    else
+      input_string[1..40] + "..."
+    end
+  end
+  
 end

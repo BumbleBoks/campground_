@@ -34,6 +34,20 @@ describe Common::MissingTrailsController do
   # 
   # end
 
+  describe "delete method - if not admin" do
+    before do
+      user = FactoryGirl.create(:user)
+      log_in user
+      @missing_trail = FactoryGirl.create(:missing_trail)
+    end
+    
+    it "should not delete the trail" do
+      delete :destroy, id: @missing_trail.id
+      Common::MissingTrail.find_by(id: @missing_trail.id).should_not be_nil
+    end
+    
+  end
+
 end
 
 
